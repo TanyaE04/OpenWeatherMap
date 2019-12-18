@@ -42,7 +42,6 @@ public class HttpClient implements Job {
                 stringBuilder.append(line);
             }
             body = stringBuilder.toString();
-            System.out.println(body);
         } catch (IOException e) {
             e.printStackTrace();
         }
