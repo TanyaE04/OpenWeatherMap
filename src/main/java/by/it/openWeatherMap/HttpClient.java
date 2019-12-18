@@ -5,26 +5,32 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ResourceBundle;
 
 
-public class HttpClient {
-    private final static String APPID = "api.key";
-    private final static String url = "api.request.url";
+public class HttpClient implements Job {
 
-    public static void main(String[] args) {
-        ResourceBundle bundle = ResourceBundle.getBundle("Configuration");
+    public void getWeatherData() {
+
+        int status;
+        String date;
+        String body;
+
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(bundle.getString(url) + bundle.getString(APPID));
+        HttpGet httpGet = new HttpGet(Parameters.URL + Parameters.APPID);
         CloseableHttpResponse response;
         InputStream inputStream = null;
         try {
             response = httpClient.execute(httpGet);
+            status = response.getStatusLine().getStatusCode();
+            date = response.getFirstHeader("Date").toString();
             inputStream = response.getEntity().getContent();
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,10 +42,14 @@ public class HttpClient {
                 stringBuilder.append(line);
                 stringBuilder.append('\n');
             }
-            String json = stringBuilder.toString();
-            System.out.println(json);
+            body = stringBuilder.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        getWeatherData();
     }
 }
