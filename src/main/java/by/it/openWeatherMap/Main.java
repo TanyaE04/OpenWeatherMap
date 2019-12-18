@@ -15,10 +15,10 @@ public class Main {
             Scheduler scheduler = schedulerFactory.getScheduler();
             scheduler.start();
             JobDetail job = newJob(HttpClient.class)
-                    .withIdentity("myJob", "group1")
+                    .withIdentity("myJob")
                     .build();
             Trigger trigger = newTrigger()
-                    .withIdentity("myTrigger", "group1")
+                    .withIdentity("myTrigger")
                     .withSchedule(cronSchedule(Parameters.SCHEDULE))
                     .build();
             scheduler.scheduleJob(job, trigger);
