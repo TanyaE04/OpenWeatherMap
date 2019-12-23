@@ -16,13 +16,15 @@ After clone the project, in the "Confif.properties" (src-main-resources) set the
 
 Then at the root of the project:  
      '''
-     //compile the application 
+     //compile the application   
      mvn compile   
-     //launch the application  
-     mvn exec:java -Dexec.mainclass="by.it.openWeatherMap.Main
+     //launch the application    
+     mvn exec:java -Dexec.mainclass="by.it.openWeatherMap.Main  
      '''
 
 To check (watch) the saving weather data you need:  
+'''
       mongo //connect to a MongoDB on your localhost with default port 27017  
       use test //choose the database  
-      db.openweathermap.find() //document from collection
+      db.openweathermap.find() //document from collection   
+      ''''
