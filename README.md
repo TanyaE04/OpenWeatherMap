@@ -15,7 +15,7 @@ This application allows to receive weather data on a schedule (during specified 
 After clone the project, in the "Confif.properties" (src-main-resources) set the required parameters (uri database, database and collection name, APPID key, name of City, schedule).
 
 Then at the root of the project:
-      mvn compile  //compile the application
+      > mvn compile  //compile the application
       mvn exec:java -Dexec.mainclass="by.it.openWeatherMap.Main"  //launch the application
 
 To check (watch) the saving weather data you need:
