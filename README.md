@@ -24,7 +24,10 @@ Then at the root of the project:
 
 To check (watch) the saving weather data you need:  
 ```
-      mongo //connect to a MongoDB on your localhost with default port 27017  
-      use test //choose the database  
-      db.openweathermap.find() //document from collection   
+      //connect to a MongoDB on your localhost with default port 27017  
+      mongo 
+      //choose the database  
+      use test   
+      //document from collection   
+      db.openweathermap.find()   
 ```
