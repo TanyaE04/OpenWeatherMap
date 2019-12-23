@@ -14,7 +14,7 @@ public class Main {
         try {
             Scheduler scheduler = schedulerFactory.getScheduler();
             scheduler.start();
-            JobDetail job = newJob(HttpClient.class)
+            JobDetail job = newJob(Executor.class)
                     .withIdentity("myJob")
                     .build();
             Trigger trigger = newTrigger()
