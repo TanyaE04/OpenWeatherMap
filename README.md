@@ -12,7 +12,7 @@
 
   # Getting started
 
-  After clone the project, in the "Confif.properties" (src-main-resources) set the required parameters (uri database, database and collection name, APPID key, name of City, schedule).
+  After clone the project, in the "confif.properties" (src-main-resources) set the required parameters (uri database, database and collection name, APPID key, name of City, schedule).
 
   Then at the root of the project:
   ```
