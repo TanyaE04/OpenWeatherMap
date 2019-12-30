@@ -19,7 +19,7 @@
        //compile the application
        mvn compile
        //launch the application
-       mvn exec:java -Dexec.mainclass="by.it.openWeatherMap.Main
+       mvn exec:java -Dexec.mainClass="by.it.openWeatherMap.Main
   ```
 
   To check (watch) the saving weather data you need:
