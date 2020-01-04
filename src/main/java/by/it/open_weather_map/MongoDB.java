@@ -1,4 +1,4 @@
-package by.it.openWeatherMap;
+package by.it.open_weather_map;
 
 
 import com.mongodb.client.MongoClient;
