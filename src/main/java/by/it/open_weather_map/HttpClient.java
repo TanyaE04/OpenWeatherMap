@@ -12,11 +12,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class HttpClient {
 
-    private CloseableHttpResponse response;
+    private int status;
+    private Date date;
     private String body;
 
     public HttpClient() {
@@ -30,11 +35,24 @@ public class HttpClient {
         HttpGet httpGet = new HttpGet (String.valueOf (uriBuilder));
         try (CloseableHttpClient httpClient = HttpClients.createDefault ()) {
 
-            response = httpClient.execute (httpGet);
+            CloseableHttpResponse response = httpClient.execute (httpGet);
+            status = response.getStatusLine ().getStatusCode ();
+            date = getResponseDate (response.getFirstHeader ("Date").toString ());
             body = getWeatherData (response.getEntity ().getContent ());
         } catch (IOException e) {
             e.printStackTrace ();
         }
+    }
+
+    private Date getResponseDate(String d) {
+        Date date = null;
+        SimpleDateFormat format = new SimpleDateFormat ("EEE, d MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+        try {
+            date = format.parse (d.substring (6));
+        } catch (ParseException e) {
+            e.printStackTrace ();
+        }
+        return date;
     }
 
     private String getWeatherData(InputStream inputStream) {
@@ -54,7 +72,12 @@ public class HttpClient {
         return body;
     }
 
-    public CloseableHttpResponse getResponse() {
-        return response;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public Date getDate() {
+        return date;
     }
 }
